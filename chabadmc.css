@@ -1,0 +1,17 @@
+/*
+  chabadmc.org custom styles
+  Loaded site-wide from ChabadOne: Settings -> General Settings -> Advanced -> Custom Header Code
+  Served at https://ari-cmc.github.io/chabadmc-site-styles/chabadmc.css
+
+  Rules (see the chabadmc-site-css skill):
+  - Fonts (@import) go at the very top, before any other rule.
+  - Only selectors seen on the live site. Prefix our own classes "cmc-".
+  - Never style bare tags (h2, p, a, li) site-wide; scope under a real container.
+  - px, never rem/em (templates set the root font to 10px).
+  - Never touch payment, card, CVV or address fields.
+  - One dated block per change, so it can be found and removed.
+*/
+
+/* === fonts === */
+
+/* === end fonts === */
