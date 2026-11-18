@@ -47,20 +47,20 @@ li{margin-bottom:8px}
     <h2>How it looks</h2>
     <p>Scroll inside each frame. The site header, the flyer picture and the form are stand-ins, because this preview was rendered away from the real site.</p>
     <div class="previews">
-      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png?v=2" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
-      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png?v=2" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png?v=3" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png?v=3" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
     </div>
   </div>
 
   <div>
     <h2>The code</h2>
     <p>This replaces the whole page body in ChabadOne: open the page, switch to Source, select all, paste, Save.</p>
-    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">668 lines</span></div>
+    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">700 lines</span></div>
     <textarea id="code" readonly spellcheck="false" aria-label="Page code">&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Marcellus&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
-&lt;div class=&quot;cmc-wrap&quot; style=&quot;font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;font-size:17px;line-height:1.65;color:#33403f;max-width:1040px;margin:0 auto;background:#ecebdc;&quot;&gt;
+&lt;div class=&quot;cmc-wrap&quot; style=&quot;font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;font-size:17px;line-height:1.65;color:#33403f;max-width:1040px;margin:0 auto;background:#172a2e;&quot;&gt;
 &lt;style type=&quot;text/css&quot;&gt;/*&lt;![CDATA[*/
-/*!cmc-chanukah-palooza-2026 v2*/
+/*!cmc-chanukah-palooza-2026 v3*/
 
 /* =====================================================
    COLOR PALETTE (sampled from the Chanukah Palooza flyer)
@@ -70,23 +70,21 @@ li{margin-bottom:8px}
      #2b4448  teal swoosh (gradient mid)
      #efe4c8  menorah cream (text on dark)
      #d9d0b6  soft cream (secondary text on dark)
-     #f1d48a  candle gold (main button, glow)
+     #f1d48a  candle gold (buttons, rings, glow)
      #e8b85a  flame amber (accents on light backgrounds)
-     #a9ae88  sage
-     #ecebdc  sage mist (light page background)
-     #e3e2c9  sage panel
-     #c3c8a8  sage border
-     #33403f  body text
-     #5a6665  muted text
+     #ecebdc  sage mist (the one light section)
+     #33403f  body text on light
    Sizes are px on purpose: the site sets the root font to 10px.
+   Shapes are round on purpose (pills, rings, soft corners) for
+   the glow-night look; the rest of the site uses square buttons.
    ===================================================== */
 
-.cmc-wrap{box-sizing:border-box;overflow:hidden;}
+.cmc-wrap{box-sizing:border-box;overflow:hidden;border-radius:28px;}
 .cmc-wrap *{box-sizing:border-box;}
 
 /* ---------- Hero ---------- */
 .cmc-wrap .cmc-hero{
-  padding:56px 24px 54px !important;
+  padding:56px 24px 50px !important;
   text-align:center !important;
   background-color:#1f3439 !important;
   background-image:
@@ -135,16 +133,51 @@ li{margin-bottom:8px}
 .cmc-wrap p.cmc-count{
   display:table;
   margin:0 auto 28px !important;
-  padding:6px 16px;
+  padding:6px 18px;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:14px !important;
   font-weight:700;
   letter-spacing:0.08em;
   text-transform:uppercase;
   line-height:1.5;
-  color:#172a2e !important;
-  background:#f1d48a;
+  color:#f1d48a !important;
+  border:1px solid rgba(241,212,138,0.70);
+  border-radius:999px;
+  box-shadow:0 0 18px rgba(241,212,138,0.35);
   text-align:center !important;
+}
+
+/* Pill button */
+.cmc-wrap a.cmc-btn{
+  display:inline-block;
+  padding:18px 54px;
+  background:#f1d48a !important;
+  color:#172a2e !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  line-height:1.3;
+  text-transform:uppercase;
+  text-decoration:none !important;
+  border:2px solid #efe4c8;
+  border-radius:999px !important;
+  box-shadow:0 0 0 6px rgba(241,212,138,0.16), 0 0 40px rgba(241,212,138,0.40);
+  transition:background 0.2s ease, transform 0.2s ease;
+  animation:cmc-btn-glow 2.6s ease-in-out infinite;
+}
+.cmc-wrap a.cmc-btn:hover,
+.cmc-wrap a.cmc-btn:focus{
+  background:#efe4c8 !important;
+  color:#172a2e !important;
+  transform:translateY(-2px);
+  animation-play-state:paused;
+}
+.cmc-wrap a.cmc-btn:focus{outline:2px solid #efe4c8;outline-offset:5px;}
+@keyframes cmc-btn-glow{
+  0%{box-shadow:0 0 0 5px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.35), 0 0 60px rgba(232,184,90,0.18);}
+  50%{box-shadow:0 0 0 8px rgba(241,212,138,0.30), 0 0 46px rgba(241,212,138,0.65), 0 0 96px rgba(232,184,90,0.38);}
+  100%{box-shadow:0 0 0 5px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.35), 0 0 60px rgba(232,184,90,0.18);}
 }
 
 /* Key facts: when, where, cost */
@@ -158,7 +191,8 @@ li{margin-bottom:8px}
 .cmc-wrap .cmc-fact{
   padding:18px 14px 16px;
   background:rgba(239,228,200,0.07);
-  border:1px solid rgba(239,228,200,0.28);
+  border:1px solid rgba(239,228,200,0.26);
+  border-radius:22px;
   text-align:center;
 }
 .cmc-wrap .cmc-fact span{
@@ -199,46 +233,7 @@ li{margin-bottom:8px}
 .cmc-wrap .cmc-fact a.cmc-fact-link:hover,
 .cmc-wrap .cmc-fact a.cmc-fact-link:focus{color:#efe4c8 !important;}
 
-/* Square buttons (site convention) */
-.cmc-wrap a.cmc-btn{
-  display:inline-block;
-  padding:17px 50px;
-  background:#f1d48a !important;
-  color:#172a2e !important;
-  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
-  font-size:16px;
-  font-weight:700;
-  letter-spacing:0.14em;
-  line-height:1.3;
-  text-transform:uppercase;
-  text-decoration:none !important;
-  border:2px solid #efe4c8;
-  border-radius:0 !important;
-  box-shadow:0 0 0 6px rgba(241,212,138,0.16), 0 0 40px rgba(241,212,138,0.40);
-  transition:background 0.2s ease, transform 0.2s ease;
-  animation:cmc-btn-glow 2.6s ease-in-out infinite;
-}
-.cmc-wrap a.cmc-btn:hover,
-.cmc-wrap a.cmc-btn:focus{
-  background:#efe4c8 !important;
-  color:#172a2e !important;
-  transform:translateY(-2px);
-  animation-play-state:paused;
-}
-.cmc-wrap a.cmc-btn:focus{outline:2px solid #efe4c8;outline-offset:4px;}
-@keyframes cmc-btn-glow{
-  0%{box-shadow:0 0 0 5px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.35), 0 0 60px rgba(232,184,90,0.18);}
-  50%{box-shadow:0 0 0 7px rgba(241,212,138,0.30), 0 0 46px rgba(241,212,138,0.65), 0 0 96px rgba(232,184,90,0.38);}
-  100%{box-shadow:0 0 0 5px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.35), 0 0 60px rgba(232,184,90,0.18);}
-}
-
-/* ---------- Shared section pieces ---------- */
-.cmc-wrap .cmc-section{
-  padding:58px 24px 60px !important;
-  text-align:center !important;
-  background-color:#ecebdc !important;
-  background-image:radial-gradient(ellipse 55% 50% at 50% 0%, rgba(241,212,138,0.34) 0%, rgba(241,212,138,0) 72%) !important;
-}
+/* ---------- Shared heading and intro text ---------- */
 .cmc-wrap h2.cmc-h{
   margin:0 0 10px !important;
   font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif !important;
@@ -246,83 +241,96 @@ li{margin-bottom:8px}
   font-weight:400 !important;
   line-height:1.15 !important;
   letter-spacing:0.02em;
-  color:#1f3439 !important;
+  color:#efe4c8 !important;
   text-align:center !important;
+  text-shadow:0 0 16px rgba(241,212,138,0.45), 0 0 44px rgba(232,184,90,0.28);
 }
 .cmc-wrap p.cmc-sub{
   max-width:580px;
-  margin:0 auto 32px !important;
+  margin:0 auto 34px !important;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:17px !important;
   line-height:1.6 !important;
-  color:#33403f !important;
+  color:#d9d0b6 !important;
   text-align:center !important;
 }
 
-/* ---------- What&#x27;s inside: activity cards ---------- */
+/* ---------- Inside the Glow Zone: glowing tiles ---------- */
+.cmc-wrap .cmc-features{
+  padding:58px 24px 64px !important;
+  text-align:center !important;
+  background-color:#172a2e !important;
+  background-image:
+    radial-gradient(ellipse 46% 26% at 50% 0%, rgba(241,212,138,0.22) 0%, rgba(241,212,138,0) 72%),
+    radial-gradient(circle at 96% 96%, rgba(232,184,90,0.16) 0%, rgba(232,184,90,0) 34%),
+    radial-gradient(circle at 3% 60%, rgba(241,212,138,0.10) 0%, rgba(241,212,138,0) 30%) !important;
+}
 .cmc-wrap .cmc-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  max-width:860px;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  max-width:900px;
   margin:0 auto;
 }
 .cmc-wrap .cmc-card{
-  padding:26px 14px 22px;
-  background:#ffffff;
-  border:1px solid #c3c8a8;
-  border-bottom:3px solid #a9ae88;
+  padding:26px 12px 22px;
+  background-color:rgba(239,228,200,0.05);
+  background-image:radial-gradient(ellipse 90% 60% at 50% 0%, rgba(241,212,138,0.20) 0%, rgba(241,212,138,0) 72%);
+  border:1px solid rgba(241,212,138,0.34);
+  border-radius:28px;
+  box-shadow:0 0 22px rgba(241,212,138,0.10);
   text-align:center;
   transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 .cmc-wrap .cmc-card:hover{
-  transform:translateY(-4px);
-  border-bottom-color:#e8b85a;
-  box-shadow:0 10px 30px rgba(31,52,57,0.14), 0 0 28px rgba(241,212,138,0.55);
+  transform:translateY(-5px);
+  border-color:#f1d48a;
+  box-shadow:0 0 0 1px rgba(241,212,138,0.55), 0 0 40px rgba(241,212,138,0.50);
 }
 .cmc-wrap .cmc-card span{
   display:block;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
 }
 .cmc-wrap .cmc-card span.cmc-icon{
-  width:66px;
-  height:66px;
-  margin:0 auto 14px;
-  font-size:30px;
-  line-height:66px;
+  width:76px;
+  height:76px;
+  margin:0 auto 16px;
+  font-size:34px;
+  line-height:72px;
   color:#f1d48a;
-  background:#1f3439;
+  background:#172a2e;
+  border:2px solid #f1d48a;
   border-radius:50%;
-  box-shadow:0 0 0 4px rgba(241,212,138,0.35), 0 0 22px rgba(241,212,138,0.65);
+  box-shadow:0 0 0 6px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.70), inset 0 0 14px rgba(241,212,138,0.30);
 }
 .cmc-wrap .cmc-card span.cmc-card-title{
   font-size:17px;
   font-weight:700;
   line-height:1.3;
-  color:#1f3439;
+  color:#efe4c8;
 }
 .cmc-wrap .cmc-card span.cmc-card-text{
   margin-top:4px;
   font-size:14px;
   font-weight:400;
   line-height:1.4;
-  color:#5a6665;
+  color:#d9d0b6;
 }
-/* ---------- More to come: announcement banner under the cards ---------- */
+
+/* The last tile: an open slot for what is still to be announced.
+   Same shape as the others, dashed outline, slow pulse. */
 .cmc-wrap .cmc-more{
+  grid-column:span 2;
   display:flex;
   align-items:center;
-  gap:22px;
-  max-width:860px;
-  margin:14px auto 0;
-  padding:24px 28px;
+  gap:20px;
+  padding:22px 24px;
   text-align:left;
-  background-color:#1f3439;
-  background-image:
-    radial-gradient(circle at 0% 50%, rgba(241,212,138,0.30) 0%, rgba(232,184,90,0) 46%),
-    linear-gradient(120deg, #2b4448 0%, #1f3439 55%, #172a2e 100%);
-  border:1px solid #e8b85a;
-  box-shadow:0 0 30px rgba(241,212,138,0.50);
+  background-color:rgba(241,212,138,0.07);
+  background-image:radial-gradient(ellipse 70% 90% at 0% 50%, rgba(241,212,138,0.22) 0%, rgba(241,212,138,0) 70%);
+  border:2px dashed rgba(241,212,138,0.80);
+  border-radius:28px;
+  animation:cmc-more-pulse 2.8s ease-in-out infinite;
 }
 .cmc-wrap .cmc-more span{
   display:block;
@@ -330,21 +338,20 @@ li{margin-bottom:8px}
 }
 .cmc-wrap .cmc-more span.cmc-more-mark{
   flex:0 0 auto;
-  width:72px;
-  height:72px;
+  width:76px;
+  height:76px;
   font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif;
-  font-size:44px;
+  font-size:46px;
   line-height:72px;
   text-align:center;
   color:#f1d48a;
-  border:2px solid #f1d48a;
+  border:2px dashed #f1d48a;
   border-radius:50%;
-  text-shadow:0 0 12px rgba(241,212,138,0.9);
-  box-shadow:0 0 0 5px rgba(241,212,138,0.18), 0 0 26px rgba(241,212,138,0.60);
-  animation:cmc-more-pulse 2.6s ease-in-out infinite;
+  text-shadow:0 0 12px rgba(241,212,138,0.95), 0 0 30px rgba(232,184,90,0.70);
 }
+.cmc-wrap .cmc-more .cmc-more-body{flex:1 1 auto;min-width:0;}
 .cmc-wrap .cmc-more span.cmc-more-label{
-  margin-bottom:4px;
+  margin-bottom:3px;
   font-size:12px;
   font-weight:700;
   letter-spacing:0.18em;
@@ -353,95 +360,100 @@ li{margin-bottom:8px}
   color:#f1d48a;
 }
 .cmc-wrap .cmc-more span.cmc-more-title{
-  margin-bottom:6px;
+  margin-bottom:5px;
   font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif;
-  font-size:28px;
+  font-size:25px;
   font-weight:400;
   line-height:1.2;
   color:#efe4c8;
 }
 .cmc-wrap .cmc-more span.cmc-more-text{
-  font-size:16px;
+  font-size:15px;
   font-weight:400;
-  line-height:1.55;
+  line-height:1.5;
   color:#d9d0b6;
 }
 @keyframes cmc-more-pulse{
-  0%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 18px rgba(241,212,138,0.40);}
-  50%{box-shadow:0 0 0 8px rgba(241,212,138,0.30), 0 0 40px rgba(241,212,138,0.85);}
-  100%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 18px rgba(241,212,138,0.40);}
+  0%{box-shadow:0 0 18px rgba(241,212,138,0.18);}
+  50%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 46px rgba(241,212,138,0.60);}
+  100%{box-shadow:0 0 18px rgba(241,212,138,0.18);}
 }
-.cmc-wrap p.cmc-perk{
-  max-width:580px;
-  margin:26px auto 0 !important;
-  padding:14px 18px;
+
+/* Beanie: a sticker slapped on at a slight angle */
+.cmc-wrap p.cmc-sticker{
+  display:table;
+  margin:38px auto 0 !important;
+  padding:11px 28px;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:16px !important;
-  font-weight:500;
-  line-height:1.5 !important;
-  color:#1f3439 !important;
-  background:#e3e2c9;
-  border-left:4px solid #e8b85a;
-  border-right:4px solid #e8b85a;
+  font-weight:700;
+  line-height:1.4 !important;
+  color:#172a2e !important;
+  background:#f1d48a;
+  border-radius:999px;
+  box-shadow:0 5px 0 rgba(10,22,25,0.45), 0 0 34px rgba(241,212,138,0.55);
+  transform:rotate(-2deg);
   text-align:center !important;
 }
 
-/* ---------- New here: flyer beside the welcome ---------- */
+/* ---------- New here: the one light section, flyer beside the welcome ---------- */
 .cmc-wrap .cmc-welcome{
-  padding:60px 24px !important;
-  background-color:#172a2e !important;
-  background-image:
-    radial-gradient(ellipse 50% 60% at 22% 50%, rgba(241,212,138,0.20) 0%, rgba(232,184,90,0) 70%),
-    linear-gradient(200deg, #2b4448 0%, #1f3439 50%, #172a2e 100%) !important;
+  padding:64px 24px !important;
+  background-color:#ecebdc !important;
+  background-image:radial-gradient(ellipse 46% 70% at 22% 50%, rgba(241,212,138,0.55) 0%, rgba(241,212,138,0) 72%) !important;
 }
 .cmc-wrap .cmc-split{
   display:flex;
   flex-wrap:wrap;
   align-items:center;
   justify-content:center;
-  gap:40px;
+  gap:48px;
   max-width:900px;
   margin:0 auto;
 }
-.cmc-wrap .cmc-split-flyer{flex:0 1 340px;max-width:340px;}
+.cmc-wrap .cmc-split-flyer{flex:0 1 330px;max-width:330px;}
 .cmc-wrap .cmc-split-text{flex:1 1 300px;max-width:470px;text-align:left;}
 .cmc-wrap a.cmc-flyer-link{
   display:block;
+  overflow:hidden;
   text-decoration:none !important;
   border:0;
-  box-shadow:0 18px 50px rgba(10,22,25,0.50), 0 0 0 1px rgba(241,212,138,0.60), 0 0 46px rgba(241,212,138,0.38);
+  border-radius:22px;
+  box-shadow:0 20px 46px rgba(23,42,46,0.40), 0 0 0 5px #f1d48a, 0 0 50px rgba(232,184,90,0.55);
+  transform:rotate(-2deg);
   transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
 .cmc-wrap a.cmc-flyer-link:hover,
 .cmc-wrap a.cmc-flyer-link:focus{
-  transform:translateY(-4px) rotate(-1deg);
-  box-shadow:0 22px 56px rgba(10,22,25,0.55), 0 0 0 2px rgba(241,212,138,0.85), 0 0 70px rgba(241,212,138,0.60);
+  transform:rotate(0deg) translateY(-4px);
+  box-shadow:0 26px 56px rgba(23,42,46,0.45), 0 0 0 5px #f1d48a, 0 0 80px rgba(232,184,90,0.80);
 }
-.cmc-wrap a.cmc-flyer-link:focus{outline:2px solid #f1d48a;outline-offset:6px;}
+.cmc-wrap a.cmc-flyer-link:focus{outline:2px solid #1f3439;outline-offset:8px;}
 .cmc-wrap a.cmc-flyer-link img{width:100%;height:auto;display:block;border:0;}
 .cmc-wrap .cmc-welcome h2.cmc-h{
   margin:0 0 14px !important;
   font-size:34px !important;
-  color:#efe4c8 !important;
+  color:#1f3439 !important;
   text-align:left !important;
+  text-shadow:none;
 }
 .cmc-wrap .cmc-welcome p.cmc-welcome-text{
-  margin:0 0 18px !important;
+  margin:0 0 20px !important;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:17px !important;
   line-height:1.65 !important;
-  color:#efe4c8 !important;
+  color:#33403f !important;
   text-align:left !important;
 }
 .cmc-wrap .cmc-welcome p.cmc-check{
   position:relative;
-  margin:0 0 10px !important;
-  padding:0 0 0 30px !important;
+  margin:0 0 12px !important;
+  padding:0 0 0 38px !important;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:17px !important;
   font-weight:500;
-  line-height:1.5 !important;
-  color:#efe4c8 !important;
+  line-height:26px !important;
+  color:#1f3439 !important;
   text-align:left !important;
 }
 .cmc-wrap .cmc-welcome p.cmc-check:before{
@@ -449,31 +461,45 @@ li{margin-bottom:8px}
   position:absolute;
   left:0;
   top:0;
+  width:26px;
+  height:26px;
+  font-size:15px;
   font-weight:700;
-  color:#f1d48a;
-  text-shadow:0 0 10px rgba(241,212,138,0.8);
+  line-height:26px;
+  text-align:center;
+  color:#172a2e;
+  background:#f1d48a;
+  border-radius:50%;
+  box-shadow:0 0 12px rgba(232,184,90,0.80);
 }
 
 /* ---------- RSVP form ---------- */
-.cmc-wrap .cmc-rsvp-section{padding-bottom:70px !important;}
+.cmc-wrap .cmc-rsvp-section{
+  padding:60px 24px 74px !important;
+  text-align:center !important;
+  background-color:#172a2e !important;
+  background-image:
+    radial-gradient(ellipse 56% 34% at 50% 0%, rgba(241,212,138,0.30) 0%, rgba(241,212,138,0) 74%),
+    linear-gradient(200deg, #2b4448 0%, #1f3439 50%, #172a2e 100%) !important;
+}
+.cmc-wrap .cmc-rsvp-section p.cmc-sub{margin-bottom:8px !important;color:#efe4c8 !important;}
 .cmc-wrap p.cmc-rsvp-when{
-  margin:0 auto 26px !important;
+  margin:0 auto 28px !important;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:15px !important;
   font-weight:700;
   letter-spacing:0.06em;
   line-height:1.5 !important;
-  color:#1f3439 !important;
+  color:#f1d48a !important;
   text-align:center !important;
 }
 .cmc-wrap .cmc-rsvp-form{
   max-width:680px;
   margin:0 auto;
-  padding:28px 26px;
+  padding:32px 30px;
   background:#ffffff;
-  border:1px solid #c3c8a8;
-  border-top:4px solid #1f3439;
-  box-shadow:0 0 36px rgba(241,212,138,0.40);
+  border-radius:28px;
+  box-shadow:0 0 0 6px rgba(241,212,138,0.22), 0 0 70px rgba(241,212,138,0.45);
   text-align:left;
 }
 
@@ -488,7 +514,7 @@ li{margin-bottom:8px}
 }
 .cmc-wrap .cmc-sticky a.cmc-sticky-btn{
   flex:0 0 auto;
-  padding:11px 20px;
+  padding:11px 22px;
   background:#f1d48a !important;
   color:#172a2e !important;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
@@ -498,19 +524,22 @@ li{margin-bottom:8px}
   line-height:1.2;
   text-transform:uppercase;
   text-decoration:none !important;
-  border-radius:0 !important;
+  border-radius:999px !important;
+  box-shadow:0 0 18px rgba(241,212,138,0.55);
 }
 
 /* ---------- Smaller screens ---------- */
 @media (max-width:780px){
-  .cmc-wrap .cmc-hero{padding:44px 18px 44px !important;}
+  .cmc-wrap{border-radius:22px;}
+  .cmc-wrap .cmc-hero{padding:44px 18px 42px !important;}
   .cmc-wrap h2.cmc-hero-title{font-size:48px !important;}
   .cmc-wrap p.cmc-hero-lede{font-size:18px !important;}
-  .cmc-wrap .cmc-section{padding:44px 18px 46px !important;}
+  .cmc-wrap .cmc-features{padding:44px 16px 50px !important;}
   .cmc-wrap h2.cmc-h{font-size:30px !important;}
-  .cmc-wrap .cmc-welcome{padding:46px 18px !important;}
+  .cmc-wrap .cmc-welcome{padding:50px 20px !important;}
   .cmc-wrap .cmc-welcome h2.cmc-h{font-size:28px !important;}
-  .cmc-wrap .cmc-split{gap:30px;}
+  .cmc-wrap .cmc-split{gap:36px;}
+  .cmc-wrap .cmc-rsvp-section{padding:46px 16px 56px !important;}
   .cmc-wrap .cmc-sticky.cmc-on{
     display:flex;
     position:fixed;
@@ -527,28 +556,31 @@ li{margin-bottom:8px}
     box-shadow:0 -6px 24px rgba(10,22,25,0.35);
   }
 }
+@media (max-width:700px){
+  .cmc-wrap .cmc-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .cmc-wrap .cmc-card{padding:22px 8px 18px;border-radius:24px;}
+  .cmc-wrap .cmc-card span.cmc-icon{width:64px;height:64px;line-height:60px;font-size:28px;margin-bottom:12px;}
+  .cmc-wrap .cmc-card span.cmc-card-title{font-size:15px;}
+  .cmc-wrap .cmc-card span.cmc-card-text{font-size:13px;}
+  .cmc-wrap .cmc-more{flex-direction:column;gap:12px;padding:24px 18px;text-align:center;border-radius:24px;}
+  .cmc-wrap .cmc-more span.cmc-more-title{font-size:24px;}
+}
 @media (max-width:600px){
   .cmc-wrap .cmc-facts{grid-template-columns:1fr;gap:10px;max-width:420px;}
   .cmc-wrap .cmc-fact{padding:14px 12px 12px;}
-  .cmc-wrap .cmc-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-  .cmc-wrap .cmc-card{padding:20px 8px 16px;}
-  .cmc-wrap .cmc-card span.cmc-icon{width:56px;height:56px;line-height:56px;font-size:26px;}
-  .cmc-wrap .cmc-card span.cmc-card-title{font-size:15px;}
-  .cmc-wrap .cmc-card span.cmc-card-text{font-size:13px;}
-  .cmc-wrap .cmc-more{flex-direction:column;gap:14px;margin-top:10px;padding:24px 18px;text-align:center;}
-  .cmc-wrap .cmc-more span.cmc-more-title{font-size:24px;}
+  .cmc-wrap p.cmc-sticker{border-radius:26px;padding:11px 22px;}
 }
 @media (max-width:480px){
   .cmc-wrap h2.cmc-hero-title{font-size:40px !important;}
-  .cmc-wrap a.cmc-btn{display:block !important;width:100% !important;padding:16px 20px !important;}
+  .cmc-wrap a.cmc-btn{display:block !important;width:100% !important;padding:17px 20px !important;}
   .cmc-wrap h2.cmc-h{font-size:27px !important;}
-  .cmc-wrap .cmc-rsvp-form{padding:20px 14px !important;}
+  .cmc-wrap .cmc-rsvp-form{padding:22px 16px !important;border-radius:22px;}
 }
 @media (prefers-reduced-motion: reduce){
   .cmc-wrap a.cmc-btn{animation:none !important;transition:none !important;transform:none !important;box-shadow:0 0 0 6px rgba(241,212,138,0.24), 0 0 44px rgba(241,212,138,0.55) !important;}
-  .cmc-wrap .cmc-card,
-  .cmc-wrap a.cmc-flyer-link{transition:none !important;transform:none !important;}
-  .cmc-wrap .cmc-more span.cmc-more-mark{animation:none !important;}
+  .cmc-wrap .cmc-more{animation:none !important;box-shadow:0 0 30px rgba(241,212,138,0.40) !important;}
+  .cmc-wrap .cmc-card{transition:none !important;transform:none !important;}
+  .cmc-wrap a.cmc-flyer-link{transition:none !important;}
 }
 /*]]&gt;*/
 &lt;/style&gt;
@@ -563,7 +595,6 @@ li{margin-bottom:8px}
 &lt;p class=&quot;cmc-hero-lede&quot;&gt;A free Chanukah party for Jewish families in the Mendham area. No affiliation needed.&lt;/p&gt;
 
 &lt;p class=&quot;cmc-count&quot; id=&quot;cmc-count&quot;&gt;Sunday, December 6&lt;/p&gt;
-
 &lt;a class=&quot;cmc-btn&quot; href=&quot;#cmc-rsvp&quot; id=&quot;cmc-hero-btn&quot;&gt;Free RSVP&lt;/a&gt;
 
 &lt;div class=&quot;cmc-facts&quot;&gt;
@@ -575,10 +606,11 @@ li{margin-bottom:8px}
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;!-- ======================================================
-     WHAT&#x27;S INSIDE: activity cards
+     INSIDE THE GLOW ZONE: six glowing tiles, then one open
+     slot for what is still to be announced
      ====================================================== --&gt;
 
-&lt;div class=&quot;cmc-section&quot;&gt;
+&lt;div class=&quot;cmc-features&quot;&gt;
 &lt;h2 class=&quot;cmc-h&quot;&gt;Inside the Glow Zone&lt;/h2&gt;
 
 &lt;p class=&quot;cmc-sub&quot;&gt;Our 4th annual Chanukah Palooza is a glow party for the whole family.&lt;/p&gt;
@@ -595,14 +627,14 @@ li{margin-bottom:8px}
 &lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#9749;&amp;#65039;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Hot cocoa bar&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;Warm up in between&lt;/span&gt;&lt;/div&gt;
 
 &lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#127849;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Latkes &amp;amp; donuts&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;All you can eat&lt;/span&gt;&lt;/div&gt;
-&lt;/div&gt;
 
 &lt;div class=&quot;cmc-more&quot;&gt;&lt;span class=&quot;cmc-more-mark&quot;&gt;?&lt;/span&gt;
 
 &lt;div class=&quot;cmc-more-body&quot;&gt;&lt;span class=&quot;cmc-more-label&quot;&gt;Stay tuned&lt;/span&gt; &lt;span class=&quot;cmc-more-title&quot;&gt;More surprises may be on the way&lt;/span&gt; &lt;span class=&quot;cmc-more-text&quot;&gt;Keep an eye out for announcements. RSVP and follow us on Facebook or Instagram so you don&amp;#8217;t miss them.&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p class=&quot;cmc-perk&quot;&gt;The first 20 guests get a beanie, on us.&lt;/p&gt;
+&lt;p class=&quot;cmc-sticker&quot;&gt;The first 20 guests get a beanie, on us&lt;/p&gt;
 &lt;/div&gt;
 &lt;!-- ======================================================
      NEW HERE: flyer beside the welcome
@@ -629,10 +661,10 @@ li{margin-bottom:8px}
      RSVP FORM
      ====================================================== --&gt;
 
-&lt;div class=&quot;cmc-section cmc-rsvp-section&quot; id=&quot;cmc-rsvp&quot;&gt;
+&lt;div class=&quot;cmc-rsvp-section&quot; id=&quot;cmc-rsvp&quot;&gt;
 &lt;h2 class=&quot;cmc-h&quot;&gt;Free RSVP&lt;/h2&gt;
 
-&lt;p class=&quot;cmc-sub&quot; style=&quot;margin-bottom:8px !important;&quot;&gt;Let us know you&amp;#8217;re coming, so there are enough latkes, donuts and glow for everyone.&lt;/p&gt;
+&lt;p class=&quot;cmc-sub&quot;&gt;Let us know you&amp;#8217;re coming, so there are enough latkes, donuts and glow for everyone.&lt;/p&gt;
 
 &lt;p class=&quot;cmc-rsvp-when&quot;&gt;Sunday, Dec 6 &amp;#183; 5:00 PM &amp;#183; 29 E Main St, Mendham Borough&lt;/p&gt;
 
