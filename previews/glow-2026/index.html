@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Glow Zone Page Redesign</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono&display=swap">
+<style>
+/* Layout: one reading column. Two scrollable preview frames side by side, then the code box with its copy button, then the check list. */
+:root{
+  --bg:#f2f0e2; --panel:#ffffff; --fg:#22302f; --muted:#5a6665; --line:#c9cdb2; --accent:#1f3439; --accent-fg:#f1d48a; --mark:#b9842a;
+  --display:'Marcellus',Georgia,serif; --body:'IBM Plex Sans',Arial,sans-serif; --mono:'IBM Plex Mono',Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#132123; --panel:#1b2d31; --fg:#efe4c8; --muted:#b5b9a2; --line:#3a5055; --accent:#f1d48a; --accent-fg:#172a2e; --mark:#f1d48a; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#132123; --panel:#1b2d31; --fg:#efe4c8; --muted:#b5b9a2; --line:#3a5055; --accent:#f1d48a; --accent-fg:#172a2e; --mark:#f1d48a; color-scheme:dark }
+*{box-sizing:border-box}
+img{max-width:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-block:36px 64px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:40px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,44px);line-height:1.1;margin:0 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+p{margin:0;max-width:65ch}
+.lede{color:var(--muted);font-size:17px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mark);font-weight:700;margin-bottom:8px}
+.previews{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:start;margin-top:16px}
+figure{margin:0;min-width:0}
+figcaption{font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.frame{height:620px;overflow-y:auto;border:1px solid var(--line);background:var(--panel)}
+.frame img{display:block;width:100%;height:auto}
+.codehead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 8px}
+button{font-family:var(--body);font-size:15px;font-weight:700;letter-spacing:.04em;padding:11px 22px;background:var(--accent);color:var(--accent-fg);border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+#status{font-size:14px;color:var(--muted)}
+textarea{display:block;width:100%;height:340px;padding:14px;font-family:var(--mono);font-size:12.5px;line-height:1.5;color:var(--fg);background:var(--panel);border:1px solid var(--line);resize:vertical;white-space:pre;overflow:auto}
+ul{margin:12px 0 0;padding-left:20px;max-width:70ch}
+li{margin-bottom:8px}
+@media (max-width:700px){ .previews{grid-template-columns:minmax(0,1fr)} .frame{height:520px} }
+</style>
+<div class="wrap">
+  <div>
+    <div class="eyebrow">chabadmc.org/glow</div>
+    <h1>Glow Zone page redesign</h1>
+    <p class="lede">A new version of the Chanukah Palooza RSVP page, written for someone arriving from the Facebook ad on a phone. Nothing here is live yet.</p>
+  </div>
+
+  <div>
+    <h2>How it looks</h2>
+    <p>Scroll inside each frame. The site header, the flyer picture and the form are stand-ins, because this preview was rendered away from the real site.</p>
+    <div class="previews">
+      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
+    </div>
+  </div>
+
+  <div>
+    <h2>The code</h2>
+    <p>This replaces the whole page body in ChabadOne: open the page, switch to Source, select all, paste, Save.</p>
+    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">609 lines</span></div>
+    <textarea id="code" readonly spellcheck="false" aria-label="Page code">&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Marcellus&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;div class=&quot;cmc-wrap&quot; style=&quot;font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;font-size:17px;line-height:1.65;color:#33403f;max-width:1040px;margin:0 auto;background:#ecebdc;&quot;&gt;
+&lt;style type=&quot;text/css&quot;&gt;/*&lt;![CDATA[*/
+/*!cmc-chanukah-palooza-2026 v2*/
+
+/* =====================================================
+   COLOR PALETTE (sampled from the Chanukah Palooza flyer)
+   Plain hex only. ChabadOne does not render var().
+     #172a2e  deep pine (darkest)
+     #1f3439  pine teal (flyer background)
+     #2b4448  teal swoosh (gradient mid)
+     #efe4c8  menorah cream (text on dark)
+     #d9d0b6  soft cream (secondary text on dark)
+     #f1d48a  candle gold (main button, glow)
+     #e8b85a  flame amber (accents on light backgrounds)
+     #a9ae88  sage
+     #ecebdc  sage mist (light page background)
+     #e3e2c9  sage panel
+     #c3c8a8  sage border
+     #33403f  body text
+     #5a6665  muted text
+   Sizes are px on purpose: the site sets the root font to 10px.
+   ===================================================== */
+
+.cmc-wrap{box-sizing:border-box;overflow:hidden;}
+.cmc-wrap *{box-sizing:border-box;}
+
+/* ---------- Hero ---------- */
+.cmc-wrap .cmc-hero{
+  padding:56px 24px 54px !important;
+  text-align:center !important;
+  background-color:#1f3439 !important;
+  background-image:
+    radial-gradient(ellipse 60% 46% at 50% 0%, rgba(241,212,138,0.36) 0%, rgba(232,184,90,0.10) 46%, rgba(232,184,90,0) 76%),
+    radial-gradient(circle at 8% 88%, rgba(232,184,90,0.18) 0%, rgba(232,184,90,0) 38%),
+    radial-gradient(circle at 93% 68%, rgba(241,212,138,0.15) 0%, rgba(241,212,138,0) 36%),
+    linear-gradient(160deg, #2b4448 0%, #1f3439 45%, #172a2e 100%) !important;
+}
+.cmc-wrap p.cmc-eyebrow{
+  margin:0 0 16px !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:13px !important;
+  font-weight:500;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:#f1d48a !important;
+  text-align:center !important;
+}
+.cmc-wrap h2.cmc-hero-title{
+  margin:0 0 18px !important;
+  font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif !important;
+  font-size:62px !important;
+  font-weight:400 !important;
+  line-height:1.05 !important;
+  letter-spacing:0.01em;
+  color:#efe4c8 !important;
+  text-align:center !important;
+  text-shadow:0 0 18px rgba(241,212,138,0.45), 0 0 52px rgba(232,184,90,0.30);
+}
+.cmc-wrap h2.cmc-hero-title span{
+  color:#f1d48a !important;
+  white-space:nowrap;
+  text-shadow:0 0 14px rgba(241,212,138,0.85), 0 0 38px rgba(232,184,90,0.65), 0 0 80px rgba(232,184,90,0.40);
+}
+.cmc-wrap p.cmc-hero-lede{
+  max-width:560px;
+  margin:0 auto 20px !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:20px !important;
+  font-weight:400;
+  line-height:1.5 !important;
+  color:#efe4c8 !important;
+  text-align:center !important;
+}
+.cmc-wrap p.cmc-count{
+  display:table;
+  margin:0 auto 28px !important;
+  padding:6px 16px;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:14px !important;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:#172a2e !important;
+  background:#f1d48a;
+  text-align:center !important;
+}
+
+/* Key facts: when, where, cost */
+.cmc-wrap .cmc-facts{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  max-width:760px;
+  margin:40px auto 0;
+}
+.cmc-wrap .cmc-fact{
+  padding:18px 14px 16px;
+  background:rgba(239,228,200,0.07);
+  border:1px solid rgba(239,228,200,0.28);
+  text-align:center;
+}
+.cmc-wrap .cmc-fact span{
+  display:block;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+}
+.cmc-wrap .cmc-fact span.cmc-fact-label{
+  margin-bottom:6px;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  line-height:1.4;
+  color:#f1d48a;
+}
+.cmc-wrap .cmc-fact span.cmc-fact-value{
+  font-size:20px;
+  font-weight:700;
+  line-height:1.3;
+  color:#efe4c8;
+}
+.cmc-wrap .cmc-fact span.cmc-fact-sub{
+  margin-top:3px;
+  font-size:15px;
+  font-weight:400;
+  line-height:1.4;
+  color:#d9d0b6;
+}
+.cmc-wrap .cmc-fact a.cmc-fact-link{
+  display:inline-block;
+  margin-top:6px;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+  font-size:14px;
+  font-weight:500;
+  color:#f1d48a !important;
+  text-decoration:underline !important;
+}
+.cmc-wrap .cmc-fact a.cmc-fact-link:hover,
+.cmc-wrap .cmc-fact a.cmc-fact-link:focus{color:#efe4c8 !important;}
+
+/* Square buttons (site convention) */
+.cmc-wrap a.cmc-btn{
+  display:inline-block;
+  padding:17px 50px;
+  background:#f1d48a !important;
+  color:#172a2e !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  line-height:1.3;
+  text-transform:uppercase;
+  text-decoration:none !important;
+  border:2px solid #efe4c8;
+  border-radius:0 !important;
+  box-shadow:0 0 0 6px rgba(241,212,138,0.16), 0 0 40px rgba(241,212,138,0.40);
+  transition:background 0.2s ease, transform 0.2s ease;
+  animation:cmc-btn-glow 2.6s ease-in-out infinite;
+}
+.cmc-wrap a.cmc-btn:hover,
+.cmc-wrap a.cmc-btn:focus{
+  background:#efe4c8 !important;
+  color:#172a2e !important;
+  transform:translateY(-2px);
+  animation-play-state:paused;
+}
+.cmc-wrap a.cmc-btn:focus{outline:2px solid #efe4c8;outline-offset:4px;}
+@keyframes cmc-btn-glow{
+  0%{box-shadow:0 0 0 5px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.35), 0 0 60px rgba(232,184,90,0.18);}
+  50%{box-shadow:0 0 0 7px rgba(241,212,138,0.30), 0 0 46px rgba(241,212,138,0.65), 0 0 96px rgba(232,184,90,0.38);}
+  100%{box-shadow:0 0 0 5px rgba(241,212,138,0.14), 0 0 26px rgba(241,212,138,0.35), 0 0 60px rgba(232,184,90,0.18);}
+}
+
+/* ---------- Shared section pieces ---------- */
+.cmc-wrap .cmc-section{
+  padding:58px 24px 60px !important;
+  text-align:center !important;
+  background-color:#ecebdc !important;
+  background-image:radial-gradient(ellipse 55% 50% at 50% 0%, rgba(241,212,138,0.34) 0%, rgba(241,212,138,0) 72%) !important;
+}
+.cmc-wrap h2.cmc-h{
+  margin:0 0 10px !important;
+  font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif !important;
+  font-size:38px !important;
+  font-weight:400 !important;
+  line-height:1.15 !important;
+  letter-spacing:0.02em;
+  color:#1f3439 !important;
+  text-align:center !important;
+}
+.cmc-wrap p.cmc-sub{
+  max-width:580px;
+  margin:0 auto 32px !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:17px !important;
+  line-height:1.6 !important;
+  color:#33403f !important;
+  text-align:center !important;
+}
+
+/* ---------- What&#x27;s inside: activity cards ---------- */
+.cmc-wrap .cmc-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  max-width:860px;
+  margin:0 auto;
+}
+.cmc-wrap .cmc-card{
+  padding:26px 14px 22px;
+  background:#ffffff;
+  border:1px solid #c3c8a8;
+  border-bottom:3px solid #a9ae88;
+  text-align:center;
+  transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.cmc-wrap .cmc-card:hover{
+  transform:translateY(-4px);
+  border-bottom-color:#e8b85a;
+  box-shadow:0 10px 30px rgba(31,52,57,0.14), 0 0 28px rgba(241,212,138,0.55);
+}
+.cmc-wrap .cmc-card span{
+  display:block;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+}
+.cmc-wrap .cmc-card span.cmc-icon{
+  width:66px;
+  height:66px;
+  margin:0 auto 14px;
+  font-size:30px;
+  line-height:66px;
+  color:#f1d48a;
+  background:#1f3439;
+  border-radius:50%;
+  box-shadow:0 0 0 4px rgba(241,212,138,0.35), 0 0 22px rgba(241,212,138,0.65);
+}
+.cmc-wrap .cmc-card span.cmc-card-title{
+  font-size:17px;
+  font-weight:700;
+  line-height:1.3;
+  color:#1f3439;
+}
+.cmc-wrap .cmc-card span.cmc-card-text{
+  margin-top:4px;
+  font-size:14px;
+  font-weight:400;
+  line-height:1.4;
+  color:#5a6665;
+}
+.cmc-wrap p.cmc-perk{
+  max-width:580px;
+  margin:30px auto 0 !important;
+  padding:14px 18px;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:16px !important;
+  font-weight:500;
+  line-height:1.5 !important;
+  color:#1f3439 !important;
+  background:#e3e2c9;
+  border-left:4px solid #e8b85a;
+  border-right:4px solid #e8b85a;
+  text-align:center !important;
+}
+
+/* ---------- New here: flyer beside the welcome ---------- */
+.cmc-wrap .cmc-welcome{
+  padding:60px 24px !important;
+  background-color:#172a2e !important;
+  background-image:
+    radial-gradient(ellipse 50% 60% at 22% 50%, rgba(241,212,138,0.20) 0%, rgba(232,184,90,0) 70%),
+    linear-gradient(200deg, #2b4448 0%, #1f3439 50%, #172a2e 100%) !important;
+}
+.cmc-wrap .cmc-split{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:40px;
+  max-width:900px;
+  margin:0 auto;
+}
+.cmc-wrap .cmc-split-flyer{flex:0 1 340px;max-width:340px;}
+.cmc-wrap .cmc-split-text{flex:1 1 300px;max-width:470px;text-align:left;}
+.cmc-wrap a.cmc-flyer-link{
+  display:block;
+  text-decoration:none !important;
+  border:0;
+  box-shadow:0 18px 50px rgba(10,22,25,0.50), 0 0 0 1px rgba(241,212,138,0.60), 0 0 46px rgba(241,212,138,0.38);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cmc-wrap a.cmc-flyer-link:hover,
+.cmc-wrap a.cmc-flyer-link:focus{
+  transform:translateY(-4px) rotate(-1deg);
+  box-shadow:0 22px 56px rgba(10,22,25,0.55), 0 0 0 2px rgba(241,212,138,0.85), 0 0 70px rgba(241,212,138,0.60);
+}
+.cmc-wrap a.cmc-flyer-link:focus{outline:2px solid #f1d48a;outline-offset:6px;}
+.cmc-wrap a.cmc-flyer-link img{width:100%;height:auto;display:block;border:0;}
+.cmc-wrap .cmc-welcome h2.cmc-h{
+  margin:0 0 14px !important;
+  font-size:34px !important;
+  color:#efe4c8 !important;
+  text-align:left !important;
+}
+.cmc-wrap .cmc-welcome p.cmc-welcome-text{
+  margin:0 0 18px !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:17px !important;
+  line-height:1.65 !important;
+  color:#efe4c8 !important;
+  text-align:left !important;
+}
+.cmc-wrap .cmc-welcome p.cmc-check{
+  position:relative;
+  margin:0 0 10px !important;
+  padding:0 0 0 30px !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:17px !important;
+  font-weight:500;
+  line-height:1.5 !important;
+  color:#efe4c8 !important;
+  text-align:left !important;
+}
+.cmc-wrap .cmc-welcome p.cmc-check:before{
+  content:&quot;\2713&quot;;
+  position:absolute;
+  left:0;
+  top:0;
+  font-weight:700;
+  color:#f1d48a;
+  text-shadow:0 0 10px rgba(241,212,138,0.8);
+}
+.cmc-wrap .cmc-welcome p.cmc-teaser{
+  margin:22px 0 0 !important;
+  padding:14px 0 0 !important;
+  border-top:1px solid rgba(239,228,200,0.28);
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:15px !important;
+  line-height:1.6 !important;
+  color:#d9d0b6 !important;
+  text-align:left !important;
+}
+
+/* ---------- RSVP form ---------- */
+.cmc-wrap .cmc-rsvp-section{padding-bottom:70px !important;}
+.cmc-wrap p.cmc-rsvp-when{
+  margin:0 auto 26px !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
+  font-size:15px !important;
+  font-weight:700;
+  letter-spacing:0.06em;
+  line-height:1.5 !important;
+  color:#1f3439 !important;
+  text-align:center !important;
+}
+.cmc-wrap .cmc-rsvp-form{
+  max-width:680px;
+  margin:0 auto;
+  padding:28px 26px;
+  background:#ffffff;
+  border:1px solid #c3c8a8;
+  border-top:4px solid #1f3439;
+  box-shadow:0 0 36px rgba(241,212,138,0.40);
+  text-align:left;
+}
+
+/* ---------- Phone-only bar that follows the visitor ---------- */
+.cmc-wrap .cmc-sticky{display:none;}
+.cmc-wrap .cmc-sticky span{
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.3;
+  color:#efe4c8;
+}
+.cmc-wrap .cmc-sticky a.cmc-sticky-btn{
+  flex:0 0 auto;
+  padding:11px 20px;
+  background:#f1d48a !important;
+  color:#172a2e !important;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.10em;
+  line-height:1.2;
+  text-transform:uppercase;
+  text-decoration:none !important;
+  border-radius:0 !important;
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width:780px){
+  .cmc-wrap .cmc-hero{padding:44px 18px 44px !important;}
+  .cmc-wrap h2.cmc-hero-title{font-size:48px !important;}
+  .cmc-wrap p.cmc-hero-lede{font-size:18px !important;}
+  .cmc-wrap .cmc-section{padding:44px 18px 46px !important;}
+  .cmc-wrap h2.cmc-h{font-size:30px !important;}
+  .cmc-wrap .cmc-welcome{padding:46px 18px !important;}
+  .cmc-wrap .cmc-welcome h2.cmc-h{font-size:28px !important;}
+  .cmc-wrap .cmc-split{gap:30px;}
+  .cmc-wrap .cmc-sticky.cmc-on{
+    display:flex;
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:9990;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 14px;
+    background:#172a2e;
+    border-top:1px solid rgba(241,212,138,0.55);
+    box-shadow:0 -6px 24px rgba(10,22,25,0.35);
+  }
+}
+@media (max-width:600px){
+  .cmc-wrap .cmc-facts{grid-template-columns:1fr;gap:10px;max-width:420px;}
+  .cmc-wrap .cmc-fact{padding:14px 12px 12px;}
+  .cmc-wrap .cmc-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .cmc-wrap .cmc-card{padding:20px 8px 16px;}
+  .cmc-wrap .cmc-card span.cmc-icon{width:56px;height:56px;line-height:56px;font-size:26px;}
+  .cmc-wrap .cmc-card span.cmc-card-title{font-size:15px;}
+  .cmc-wrap .cmc-card span.cmc-card-text{font-size:13px;}
+}
+@media (max-width:480px){
+  .cmc-wrap h2.cmc-hero-title{font-size:40px !important;}
+  .cmc-wrap a.cmc-btn{display:block !important;width:100% !important;padding:16px 20px !important;}
+  .cmc-wrap h2.cmc-h{font-size:27px !important;}
+  .cmc-wrap .cmc-rsvp-form{padding:20px 14px !important;}
+}
+@media (prefers-reduced-motion: reduce){
+  .cmc-wrap a.cmc-btn{animation:none !important;transition:none !important;transform:none !important;box-shadow:0 0 0 6px rgba(241,212,138,0.24), 0 0 44px rgba(241,212,138,0.55) !important;}
+  .cmc-wrap .cmc-card,
+  .cmc-wrap a.cmc-flyer-link{transition:none !important;transform:none !important;}
+}
+/*]]&gt;*/
+&lt;/style&gt;
+&lt;!-- ======================================================
+     HERO: what, who, the button, then when, where, cost
+     ====================================================== --&gt;
+&lt;div class=&quot;cmc-hero&quot;&gt;
+&lt;p class=&quot;cmc-eyebrow&quot;&gt;Chabad of Mendham &amp;amp; Chester presents&lt;/p&gt;
+
+&lt;h2 class=&quot;cmc-hero-title&quot;&gt;Enter the &lt;span&gt;Glow Zone&lt;/span&gt;&lt;/h2&gt;
+
+&lt;p class=&quot;cmc-hero-lede&quot;&gt;A free Chanukah party for Jewish families in the Mendham area. No affiliation needed.&lt;/p&gt;
+
+&lt;p class=&quot;cmc-count&quot; id=&quot;cmc-count&quot;&gt;Sunday, December 6&lt;/p&gt;
+
+&lt;a class=&quot;cmc-btn&quot; href=&quot;#cmc-rsvp&quot; id=&quot;cmc-hero-btn&quot;&gt;Free RSVP&lt;/a&gt;
+
+&lt;div class=&quot;cmc-facts&quot;&gt;
+&lt;div class=&quot;cmc-fact&quot;&gt;&lt;span class=&quot;cmc-fact-label&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;cmc-fact-value&quot;&gt;Sunday, Dec 6&lt;/span&gt; &lt;span class=&quot;cmc-fact-sub&quot;&gt;5:00 PM&lt;/span&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-fact&quot;&gt;&lt;span class=&quot;cmc-fact-label&quot;&gt;Where&lt;/span&gt; &lt;span class=&quot;cmc-fact-value&quot;&gt;29 E Main St&lt;/span&gt; &lt;span class=&quot;cmc-fact-sub&quot;&gt;Mendham Borough, across from Audi&lt;/span&gt; &lt;a class=&quot;cmc-fact-link&quot; href=&quot;https://www.google.com/maps/search/?api=1&amp;amp;query=29+E+Main+St%2C+Mendham%2C+NJ&quot; rel=&quot;noopener&quot; target=&quot;_blank&quot;&gt;Get directions&lt;/a&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-fact&quot;&gt;&lt;span class=&quot;cmc-fact-label&quot;&gt;Cost&lt;/span&gt; &lt;span class=&quot;cmc-fact-value&quot;&gt;Free&lt;/span&gt; &lt;span class=&quot;cmc-fact-sub&quot;&gt;For the whole family&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- ======================================================
+     WHAT&#x27;S INSIDE: activity cards
+     ====================================================== --&gt;
+
+&lt;div class=&quot;cmc-section&quot;&gt;
+&lt;h2 class=&quot;cmc-h&quot;&gt;Inside the Glow Zone&lt;/h2&gt;
+
+&lt;p class=&quot;cmc-sub&quot;&gt;Our 4th annual Chanukah Palooza is a glow party for the whole family.&lt;/p&gt;
+
+&lt;div class=&quot;cmc-grid&quot;&gt;
+&lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#10024;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Glow activities&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;Glow-in-the-dark fun&lt;/span&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#129302;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Giant LED robot&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;This year&amp;#8217;s special guest&lt;/span&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#128248;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;360&amp;#176; photo booth&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;Strike a pose&lt;/span&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#127912;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Crafts &amp;amp; games&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;For every age&lt;/span&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#9749;&amp;#65039;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Hot cocoa bar&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;Warm up in between&lt;/span&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#127849;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Latkes &amp;amp; donuts&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;All you can eat&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;cmc-perk&quot;&gt;The first 20 guests get a beanie, on us.&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- ======================================================
+     NEW HERE: flyer beside the welcome
+     ====================================================== --&gt;
+
+&lt;div class=&quot;cmc-welcome&quot;&gt;
+&lt;div class=&quot;cmc-split&quot;&gt;
+&lt;div class=&quot;cmc-split-flyer&quot;&gt;&lt;a class=&quot;cmc-flyer-link&quot; href=&quot;#cmc-rsvp&quot; title=&quot;RSVP for Chanukah Palooza&quot;&gt;&lt;img alt=&quot;4th Annual Chanukah Palooza flyer: Enter the Glow Zone, Sunday December 6th at 5:00 PM, 29 E Main St, Mendham Borough&quot; height=&quot;1600&quot; src=&quot;https://chabadmc.org/media/images/1394/ggBr13943865.jpeg&quot; style=&quot;width:100%;height:auto;display:block;&quot; width=&quot;1236&quot; /&gt;&lt;/a&gt;&lt;/div&gt;
+
+&lt;div class=&quot;cmc-split-text&quot;&gt;
+&lt;h2 class=&quot;cmc-h&quot;&gt;New here? Come as you are.&lt;/h2&gt;
+
+&lt;p class=&quot;cmc-welcome-text&quot;&gt;Chanukah Palooza is hosted by Chabad of Mendham &amp;amp; Chester, and every Jewish family is welcome, whatever your background.&lt;/p&gt;
+
+&lt;p class=&quot;cmc-check&quot;&gt;Free for the whole family&lt;/p&gt;
+
+&lt;p class=&quot;cmc-check&quot;&gt;No membership or affiliation needed&lt;/p&gt;
+
+&lt;p class=&quot;cmc-check&quot;&gt;Bring your friends&lt;/p&gt;
+
+&lt;p class=&quot;cmc-teaser&quot;&gt;We might have another surprise or two up our sleeve. Follow us on Facebook or Instagram so you don&amp;#8217;t miss it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- ======================================================
+     RSVP FORM
+     ====================================================== --&gt;
+
+&lt;div class=&quot;cmc-section cmc-rsvp-section&quot; id=&quot;cmc-rsvp&quot;&gt;
+&lt;h2 class=&quot;cmc-h&quot;&gt;Free RSVP&lt;/h2&gt;
+
+&lt;p class=&quot;cmc-sub&quot; style=&quot;margin-bottom:8px !important;&quot;&gt;Let us know you&amp;#8217;re coming, so there are enough latkes, donuts and glow for everyone.&lt;/p&gt;
+
+&lt;p class=&quot;cmc-rsvp-when&quot;&gt;Sunday, Dec 6 &amp;#183; 5:00 PM &amp;#183; 29 E Main St, Mendham Borough&lt;/p&gt;
+
+&lt;div class=&quot;cmc-rsvp-form&quot;&gt;&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;https://ChabadMC.org/templates/formembed.js.asp?aid=6180322&quot;&gt; &lt;/script&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- ======================================================
+     PHONE BAR: shown by the script below, only on small
+     screens, only between the top button and the form
+     ====================================================== --&gt;
+
+&lt;div class=&quot;cmc-sticky&quot; id=&quot;cmc-sticky&quot;&gt;&lt;span&gt;Sun, Dec 6 &amp;#183; 5 PM &amp;#183; Free&lt;/span&gt; &lt;a class=&quot;cmc-sticky-btn&quot; href=&quot;#cmc-rsvp&quot;&gt;Free RSVP&lt;/a&gt;&lt;/div&gt;
+&lt;!-- Scripts. 1: scroll-to-form fix that clears a fixed site header.
+     2: days-to-go label. 3: phone bar. The page still works if
+     these are stripped. --&gt;&lt;script type=&quot;text/javascript&quot;&gt;/*&lt;![CDATA[*/
+(function(){
+  var target = document.getElementById(&#x27;cmc-rsvp&#x27;);
+  if (!target || !target.getBoundingClientRect) { return; }
+
+  /* 1. Scroll to the form, clearing any fixed or sticky site header */
+  function headerOffset(){
+    var h = 0, el, w, cs;
+    w = window.innerWidth || document.documentElement.clientWidth;
+    if (!document.elementFromPoint) { return 0; }
+    el = document.elementFromPoint(Math.floor(w / 2), 2);
+    while (el &amp;&amp; el !== document.body &amp;&amp; el !== document.documentElement) {
+      if (target.contains(el)) { return 0; }
+      cs = window.getComputedStyle ? window.getComputedStyle(el) : null;
+      if (cs &amp;&amp; (cs.position === &#x27;fixed&#x27; || cs.position === &#x27;sticky&#x27;)) {
+        h = el.getBoundingClientRect().bottom;
+        break;
+      }
+      el = el.parentNode;
+    }
+    return h &gt; 0 ? h : 0;
+  }
+
+  function align(){
+    var off = headerOffset();
+    var delta = target.getBoundingClientRect().top - off;
+    if (Math.abs(delta) &gt; 2) { window.scrollBy(0, delta); }
+  }
+
+  function go(){
+    target.scrollIntoView(true);
+    align();
+    setTimeout(align, 120);
+    setTimeout(align, 450);
+    setTimeout(align, 1000);
+  }
+
+  var links = document.querySelectorAll ? document.querySelectorAll(&#x27;.cmc-wrap a[href=&quot;#cmc-rsvp&quot;]&#x27;) : [];
+  for (var i = 0; i &lt; links.length; i++) {
+    links[i].addEventListener(&#x27;click&#x27;, function(e){
+      e.preventDefault();
+      go();
+    }, false);
+  }
+
+  if (window.location.hash === &#x27;#cmc-rsvp&#x27;) {
+    window.addEventListener(&#x27;load&#x27;, function(){ setTimeout(go, 50); }, false);
+  }
+
+  /* 2. Days-to-go label. Leaves the plain date in place once the day has passed */
+  var count = document.getElementById(&#x27;cmc-count&#x27;);
+  if (count) {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var eventDay = new Date(2026, 11, 6);
+    var days = Math.round((eventDay.getTime() - today.getTime()) / 86400000);
+    if (days &gt; 1) { count.innerHTML = days + &#x27; days to go&#x27;; }
+    else if (days === 1) { count.innerHTML = &#x27;Tomorrow at 5 PM&#x27;; }
+    else if (days === 0) { count.innerHTML = &#x27;Today at 5 PM&#x27;; }
+  }
+
+  /* 3. Phone bar: on only while neither the top button nor the form is on screen */
+  var bar = document.getElementById(&#x27;cmc-sticky&#x27;);
+  var heroBtn = document.getElementById(&#x27;cmc-hero-btn&#x27;);
+  if (bar &amp;&amp; heroBtn &amp;&amp; (&#x27;IntersectionObserver&#x27; in window)) {
+    var heroIn = true, formIn = false;
+    var io = new IntersectionObserver(function(entries){
+      for (var j = 0; j &lt; entries.length; j++) {
+        if (entries[j].target === heroBtn) { heroIn = entries[j].isIntersecting; }
+        if (entries[j].target === target) { formIn = entries[j].isIntersecting; }
+      }
+      bar.className = (!heroIn &amp;&amp; !formIn) ? &#x27;cmc-sticky cmc-on&#x27; : &#x27;cmc-sticky&#x27;;
+    }, { threshold: 0 });
+    io.observe(heroBtn);
+    io.observe(target);
+  }
+})();
+/*]]&gt;*/&lt;/script&gt;&lt;/div&gt;
+</textarea>
+  </div>
+
+  <div>
+    <h2>Check after saving</h2>
+    <ul>
+      <li>The six round icons show pictures, not empty boxes or question marks.</li>
+      <li>On a phone, the bar at the bottom appears while scrolling and does not cover anything from the site itself.</li>
+      <li>Tapping any Free RSVP button lands on the form, and the form still submits.</li>
+      <li>Get directions opens the right address.</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('copy'), box=document.getElementById('code'), status=document.getElementById('status');
+  btn.addEventListener('click',function(){
+    function fallback(){ box.focus(); box.select(); status.textContent='Selected. Press Ctrl+C to copy.'; }
+    try{
+      navigator.clipboard.writeText(box.value).then(function(){ status.textContent='Copied'; },fallback);
+    }catch(e){ fallback(); }
+  });
+})();
+</script>
