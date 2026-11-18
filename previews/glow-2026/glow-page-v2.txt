@@ -24,6 +24,16 @@
 .cmc-wrap{box-sizing:border-box;overflow:hidden;border-radius:28px;}
 .cmc-wrap *{box-sizing:border-box;}
 
+/* ---------- Hide the site's title banner on this page only ----------
+   These two rules reach outside .cmc-wrap on purpose. They live in this
+   article's own code, so they only load where this article is shown.
+   Rule 1 removes the whole banner (background image, breadcrumbs, title),
+   but only if the banner does not also contain this page's content.
+   Rule 2 is the fallback: it removes the breadcrumbs and title alone.
+   To bring the banner back, delete both rules. */
+.master-content-wrapper:has(.article-header):not(:has(.cmc-wrap)){display:none !important;}
+.article-header{display:none !important;}
+
 /* ---------- Hero ---------- */
 .cmc-wrap .cmc-hero{
   padding:56px 24px 50px !important;

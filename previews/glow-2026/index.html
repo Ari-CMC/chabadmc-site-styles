@@ -47,15 +47,15 @@ li{margin-bottom:8px}
     <h2>How it looks</h2>
     <p>Scroll inside each frame. The site header, the flyer picture and the form are stand-ins, because this preview was rendered away from the real site.</p>
     <div class="previews">
-      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png?v=3" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
-      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png?v=3" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png?v=4" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png?v=4" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
     </div>
   </div>
 
   <div>
     <h2>The code</h2>
     <p>This replaces the whole page body in ChabadOne: open the page, switch to Source, select all, paste, Save.</p>
-    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">700 lines</span></div>
+    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">710 lines</span></div>
     <textarea id="code" readonly spellcheck="false" aria-label="Page code">&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Marcellus&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;div class=&quot;cmc-wrap&quot; style=&quot;font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;font-size:17px;line-height:1.65;color:#33403f;max-width:1040px;margin:0 auto;background:#172a2e;&quot;&gt;
@@ -81,6 +81,16 @@ li{margin-bottom:8px}
 
 .cmc-wrap{box-sizing:border-box;overflow:hidden;border-radius:28px;}
 .cmc-wrap *{box-sizing:border-box;}
+
+/* ---------- Hide the site&#x27;s title banner on this page only ----------
+   These two rules reach outside .cmc-wrap on purpose. They live in this
+   article&#x27;s own code, so they only load where this article is shown.
+   Rule 1 removes the whole banner (background image, breadcrumbs, title),
+   but only if the banner does not also contain this page&#x27;s content.
+   Rule 2 is the fallback: it removes the breadcrumbs and title alone.
+   To bring the banner back, delete both rules. */
+.master-content-wrapper:has(.article-header):not(:has(.cmc-wrap)){display:none !important;}
+.article-header{display:none !important;}
 
 /* ---------- Hero ---------- */
 .cmc-wrap .cmc-hero{
@@ -766,6 +776,7 @@ li{margin-bottom:8px}
       <li>On a phone, the bar at the bottom appears while scrolling and does not cover anything from the site itself.</li>
       <li>Tapping any Free RSVP button lands on the form, and the form still submits.</li>
       <li>Get directions opens the right address.</li>
+      <li>The site’s title banner is gone on this page, with no empty strip left behind, and still shows on every other page.</li>
     </ul>
   </div>
 </div>
