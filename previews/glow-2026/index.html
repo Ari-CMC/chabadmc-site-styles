@@ -47,15 +47,15 @@ li{margin-bottom:8px}
     <h2>How it looks</h2>
     <p>Scroll inside each frame. The site header, the flyer picture and the form are stand-ins, because this preview was rendered away from the real site.</p>
     <div class="previews">
-      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
-      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Phone</figcaption><div class="frame" tabindex="0"><img src="phone.png?v=2" alt="Phone preview of the redesigned page, top to bottom"></div></figure>
+      <figure><figcaption>Desktop</figcaption><div class="frame" tabindex="0"><img src="desktop.png?v=2" alt="Desktop preview of the redesigned page, top to bottom"></div></figure>
     </div>
   </div>
 
   <div>
     <h2>The code</h2>
     <p>This replaces the whole page body in ChabadOne: open the page, switch to Source, select all, paste, Save.</p>
-    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">609 lines</span></div>
+    <div class="codehead"><button id="copy" type="button">Copy the code</button><a href="glow-page-v2.txt" style="color:var(--mark);font-weight:500">Open the code as plain text</a><span id="status" role="status">668 lines</span></div>
     <textarea id="code" readonly spellcheck="false" aria-label="Page code">&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Marcellus&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&amp;amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;div class=&quot;cmc-wrap&quot; style=&quot;font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;font-size:17px;line-height:1.65;color:#33403f;max-width:1040px;margin:0 auto;background:#ecebdc;&quot;&gt;
@@ -308,9 +308,72 @@ li{margin-bottom:8px}
   line-height:1.4;
   color:#5a6665;
 }
+/* ---------- More to come: announcement banner under the cards ---------- */
+.cmc-wrap .cmc-more{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  max-width:860px;
+  margin:14px auto 0;
+  padding:24px 28px;
+  text-align:left;
+  background-color:#1f3439;
+  background-image:
+    radial-gradient(circle at 0% 50%, rgba(241,212,138,0.30) 0%, rgba(232,184,90,0) 46%),
+    linear-gradient(120deg, #2b4448 0%, #1f3439 55%, #172a2e 100%);
+  border:1px solid #e8b85a;
+  box-shadow:0 0 30px rgba(241,212,138,0.50);
+}
+.cmc-wrap .cmc-more span{
+  display:block;
+  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif;
+}
+.cmc-wrap .cmc-more span.cmc-more-mark{
+  flex:0 0 auto;
+  width:72px;
+  height:72px;
+  font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif;
+  font-size:44px;
+  line-height:72px;
+  text-align:center;
+  color:#f1d48a;
+  border:2px solid #f1d48a;
+  border-radius:50%;
+  text-shadow:0 0 12px rgba(241,212,138,0.9);
+  box-shadow:0 0 0 5px rgba(241,212,138,0.18), 0 0 26px rgba(241,212,138,0.60);
+  animation:cmc-more-pulse 2.6s ease-in-out infinite;
+}
+.cmc-wrap .cmc-more span.cmc-more-label{
+  margin-bottom:4px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  line-height:1.4;
+  color:#f1d48a;
+}
+.cmc-wrap .cmc-more span.cmc-more-title{
+  margin-bottom:6px;
+  font-family:&#x27;La Roche Serif&#x27;,&#x27;Marcellus&#x27;,Georgia,serif;
+  font-size:28px;
+  font-weight:400;
+  line-height:1.2;
+  color:#efe4c8;
+}
+.cmc-wrap .cmc-more span.cmc-more-text{
+  font-size:16px;
+  font-weight:400;
+  line-height:1.55;
+  color:#d9d0b6;
+}
+@keyframes cmc-more-pulse{
+  0%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 18px rgba(241,212,138,0.40);}
+  50%{box-shadow:0 0 0 8px rgba(241,212,138,0.30), 0 0 40px rgba(241,212,138,0.85);}
+  100%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 18px rgba(241,212,138,0.40);}
+}
 .cmc-wrap p.cmc-perk{
   max-width:580px;
-  margin:30px auto 0 !important;
+  margin:26px auto 0 !important;
   padding:14px 18px;
   font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
   font-size:16px !important;
@@ -389,16 +452,6 @@ li{margin-bottom:8px}
   font-weight:700;
   color:#f1d48a;
   text-shadow:0 0 10px rgba(241,212,138,0.8);
-}
-.cmc-wrap .cmc-welcome p.cmc-teaser{
-  margin:22px 0 0 !important;
-  padding:14px 0 0 !important;
-  border-top:1px solid rgba(239,228,200,0.28);
-  font-family:&#x27;IBM Plex Sans&#x27;,Arial,sans-serif !important;
-  font-size:15px !important;
-  line-height:1.6 !important;
-  color:#d9d0b6 !important;
-  text-align:left !important;
 }
 
 /* ---------- RSVP form ---------- */
@@ -482,6 +535,8 @@ li{margin-bottom:8px}
   .cmc-wrap .cmc-card span.cmc-icon{width:56px;height:56px;line-height:56px;font-size:26px;}
   .cmc-wrap .cmc-card span.cmc-card-title{font-size:15px;}
   .cmc-wrap .cmc-card span.cmc-card-text{font-size:13px;}
+  .cmc-wrap .cmc-more{flex-direction:column;gap:14px;margin-top:10px;padding:24px 18px;text-align:center;}
+  .cmc-wrap .cmc-more span.cmc-more-title{font-size:24px;}
 }
 @media (max-width:480px){
   .cmc-wrap h2.cmc-hero-title{font-size:40px !important;}
@@ -493,6 +548,7 @@ li{margin-bottom:8px}
   .cmc-wrap a.cmc-btn{animation:none !important;transition:none !important;transform:none !important;box-shadow:0 0 0 6px rgba(241,212,138,0.24), 0 0 44px rgba(241,212,138,0.55) !important;}
   .cmc-wrap .cmc-card,
   .cmc-wrap a.cmc-flyer-link{transition:none !important;transform:none !important;}
+  .cmc-wrap .cmc-more span.cmc-more-mark{animation:none !important;}
 }
 /*]]&gt;*/
 &lt;/style&gt;
@@ -541,6 +597,11 @@ li{margin-bottom:8px}
 &lt;div class=&quot;cmc-card&quot;&gt;&lt;span class=&quot;cmc-icon&quot;&gt;&amp;#127849;&lt;/span&gt; &lt;span class=&quot;cmc-card-title&quot;&gt;Latkes &amp;amp; donuts&lt;/span&gt; &lt;span class=&quot;cmc-card-text&quot;&gt;All you can eat&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;
 
+&lt;div class=&quot;cmc-more&quot;&gt;&lt;span class=&quot;cmc-more-mark&quot;&gt;?&lt;/span&gt;
+
+&lt;div class=&quot;cmc-more-body&quot;&gt;&lt;span class=&quot;cmc-more-label&quot;&gt;Stay tuned&lt;/span&gt; &lt;span class=&quot;cmc-more-title&quot;&gt;More surprises may be on the way&lt;/span&gt; &lt;span class=&quot;cmc-more-text&quot;&gt;Keep an eye out for announcements. RSVP and follow us on Facebook or Instagram so you don&amp;#8217;t miss them.&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
 &lt;p class=&quot;cmc-perk&quot;&gt;The first 20 guests get a beanie, on us.&lt;/p&gt;
 &lt;/div&gt;
 &lt;!-- ======================================================
@@ -561,8 +622,6 @@ li{margin-bottom:8px}
 &lt;p class=&quot;cmc-check&quot;&gt;No membership or affiliation needed&lt;/p&gt;
 
 &lt;p class=&quot;cmc-check&quot;&gt;Bring your friends&lt;/p&gt;
-
-&lt;p class=&quot;cmc-teaser&quot;&gt;We might have another surprise or two up our sleeve. Follow us on Facebook or Instagram so you don&amp;#8217;t miss it.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

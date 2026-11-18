@@ -250,9 +250,72 @@
   line-height:1.4;
   color:#5a6665;
 }
+/* ---------- More to come: announcement banner under the cards ---------- */
+.cmc-wrap .cmc-more{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  max-width:860px;
+  margin:14px auto 0;
+  padding:24px 28px;
+  text-align:left;
+  background-color:#1f3439;
+  background-image:
+    radial-gradient(circle at 0% 50%, rgba(241,212,138,0.30) 0%, rgba(232,184,90,0) 46%),
+    linear-gradient(120deg, #2b4448 0%, #1f3439 55%, #172a2e 100%);
+  border:1px solid #e8b85a;
+  box-shadow:0 0 30px rgba(241,212,138,0.50);
+}
+.cmc-wrap .cmc-more span{
+  display:block;
+  font-family:'IBM Plex Sans',Arial,sans-serif;
+}
+.cmc-wrap .cmc-more span.cmc-more-mark{
+  flex:0 0 auto;
+  width:72px;
+  height:72px;
+  font-family:'La Roche Serif','Marcellus',Georgia,serif;
+  font-size:44px;
+  line-height:72px;
+  text-align:center;
+  color:#f1d48a;
+  border:2px solid #f1d48a;
+  border-radius:50%;
+  text-shadow:0 0 12px rgba(241,212,138,0.9);
+  box-shadow:0 0 0 5px rgba(241,212,138,0.18), 0 0 26px rgba(241,212,138,0.60);
+  animation:cmc-more-pulse 2.6s ease-in-out infinite;
+}
+.cmc-wrap .cmc-more span.cmc-more-label{
+  margin-bottom:4px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  line-height:1.4;
+  color:#f1d48a;
+}
+.cmc-wrap .cmc-more span.cmc-more-title{
+  margin-bottom:6px;
+  font-family:'La Roche Serif','Marcellus',Georgia,serif;
+  font-size:28px;
+  font-weight:400;
+  line-height:1.2;
+  color:#efe4c8;
+}
+.cmc-wrap .cmc-more span.cmc-more-text{
+  font-size:16px;
+  font-weight:400;
+  line-height:1.55;
+  color:#d9d0b6;
+}
+@keyframes cmc-more-pulse{
+  0%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 18px rgba(241,212,138,0.40);}
+  50%{box-shadow:0 0 0 8px rgba(241,212,138,0.30), 0 0 40px rgba(241,212,138,0.85);}
+  100%{box-shadow:0 0 0 4px rgba(241,212,138,0.14), 0 0 18px rgba(241,212,138,0.40);}
+}
 .cmc-wrap p.cmc-perk{
   max-width:580px;
-  margin:30px auto 0 !important;
+  margin:26px auto 0 !important;
   padding:14px 18px;
   font-family:'IBM Plex Sans',Arial,sans-serif !important;
   font-size:16px !important;
@@ -331,16 +394,6 @@
   font-weight:700;
   color:#f1d48a;
   text-shadow:0 0 10px rgba(241,212,138,0.8);
-}
-.cmc-wrap .cmc-welcome p.cmc-teaser{
-  margin:22px 0 0 !important;
-  padding:14px 0 0 !important;
-  border-top:1px solid rgba(239,228,200,0.28);
-  font-family:'IBM Plex Sans',Arial,sans-serif !important;
-  font-size:15px !important;
-  line-height:1.6 !important;
-  color:#d9d0b6 !important;
-  text-align:left !important;
 }
 
 /* ---------- RSVP form ---------- */
@@ -424,6 +477,8 @@
   .cmc-wrap .cmc-card span.cmc-icon{width:56px;height:56px;line-height:56px;font-size:26px;}
   .cmc-wrap .cmc-card span.cmc-card-title{font-size:15px;}
   .cmc-wrap .cmc-card span.cmc-card-text{font-size:13px;}
+  .cmc-wrap .cmc-more{flex-direction:column;gap:14px;margin-top:10px;padding:24px 18px;text-align:center;}
+  .cmc-wrap .cmc-more span.cmc-more-title{font-size:24px;}
 }
 @media (max-width:480px){
   .cmc-wrap h2.cmc-hero-title{font-size:40px !important;}
@@ -435,6 +490,7 @@
   .cmc-wrap a.cmc-btn{animation:none !important;transition:none !important;transform:none !important;box-shadow:0 0 0 6px rgba(241,212,138,0.24), 0 0 44px rgba(241,212,138,0.55) !important;}
   .cmc-wrap .cmc-card,
   .cmc-wrap a.cmc-flyer-link{transition:none !important;transform:none !important;}
+  .cmc-wrap .cmc-more span.cmc-more-mark{animation:none !important;}
 }
 /*]]>*/
 </style>
@@ -483,6 +539,11 @@
 <div class="cmc-card"><span class="cmc-icon">&#127849;</span> <span class="cmc-card-title">Latkes &amp; donuts</span> <span class="cmc-card-text">All you can eat</span></div>
 </div>
 
+<div class="cmc-more"><span class="cmc-more-mark">?</span>
+
+<div class="cmc-more-body"><span class="cmc-more-label">Stay tuned</span> <span class="cmc-more-title">More surprises may be on the way</span> <span class="cmc-more-text">Keep an eye out for announcements. RSVP and follow us on Facebook or Instagram so you don&#8217;t miss them.</span></div>
+</div>
+
 <p class="cmc-perk">The first 20 guests get a beanie, on us.</p>
 </div>
 <!-- ======================================================
@@ -503,8 +564,6 @@
 <p class="cmc-check">No membership or affiliation needed</p>
 
 <p class="cmc-check">Bring your friends</p>
-
-<p class="cmc-teaser">We might have another surprise or two up our sleeve. Follow us on Facebook or Instagram so you don&#8217;t miss it.</p>
 </div>
 </div>
 </div>
